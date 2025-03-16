@@ -31,10 +31,23 @@
 
 ## Результаты оптимизации:
 
-### 1. Отсутствие кеширования partial-ов _single_story.html.erb
-- Readme задания и rack-mini-profiler
-- Добавил кеширование partial'а, учел, что в него входят счётчики лайков и комментариев.
-### Замеры до добавления кеширования:
+### 1. Отсутствует local_production окружение
+#### Произвел замеры с использованием `ab` до добавления local_production:
+```
+Concurrency Level:      5
+Time taken for tests:   61.726 seconds
+Complete requests:      100
+Failed requests:        99
+   (Connect: 0, Receive: 0, Length: 99, Exceptions: 0)
+Total transferred:      16131253 bytes
+HTML transferred:       16030175 bytes
+Requests per second:    1.62 [#/sec] (mean)
+Time per request:       3086.288 [ms] (mean)
+Time per request:       617.258 [ms] (mean, across all concurrent requests)
+Transfer rate:          255.21 [Kbytes/sec] received
+```
+
+#### После добавления:
 ```
 Concurrency Level:      5
 Time taken for tests:   14.988 seconds
@@ -47,8 +60,13 @@ Time per request:       749.387 [ms] (mean)
 Time per request:       149.877 [ms] (mean, across all concurrent requests)
 Transfer rate:          857.59 [Kbytes/sec] received
 ```
+- Время обработки всех запросов сократилось в 4 раза с 60 до 15 секунд. Также количество Failed сократилось с 99 до 0.
 
-### Замеры после добавления кеширования:
+### 2. Отсутствие кеширования partial-ов _single_story.html.erb
+- Readme задания и rack-mini-profiler
+- Добавил кеширование partial'а, учел, что в него входят счётчики лайков и комментариев.
+
+#### Замеры после добавления кеширования:
 ```
 Concurrency Level:      5
 Time taken for tests:   7.179 seconds
@@ -61,6 +79,7 @@ Time per request:       358.953 [ms] (mean)
 Time per request:       71.791 [ms] (mean, across all concurrent requests)
 Transfer rate:          1772.19 [Kbytes/sec] received
 ```
-- Время обработки запросов сократилось в два раза
+- Время обработки всех запросов сократилось в два раза с 14 до 7 секунд.
+- Время выполнения отдельного запроса составило 360ms
 
 
