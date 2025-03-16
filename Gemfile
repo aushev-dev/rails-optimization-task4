@@ -108,7 +108,7 @@ gem 'newrelic_rpm'
 gem 'scout_apm'
 gem 'rack-mini-profiler'
 
-group :development do
+group :development, :local_production do
   gem "better_errors", "~> 2.5"
   gem "binding_of_caller", "~> 0.8"
   gem "brakeman", "~> 4.4", require: false
@@ -122,7 +122,7 @@ group :development do
   gem "web-console", "~> 3.7"
 end
 
-group :development, :test do
+group :development, :local_production, :test do
   gem "capybara", "~> 3.13"
   gem "derailed", "~> 0.1"
   gem "erb_lint", "~> 0.0", require: false

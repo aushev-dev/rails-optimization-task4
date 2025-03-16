@@ -8,7 +8,7 @@ x-app: &app
   image: optimize-dev-to:1.0.0
   environment: &env
     NODE_ENV: ${NODE_ENV:-development}
-    RAILS_ENV: ${RAILS_ENV:-development}
+    RAILS_ENV: ${RAILS_ENV:-local_production}
   tmpfs:
     - /tmp
     - /app/tmp/pids
@@ -35,6 +35,7 @@ x-backend: &backend
     ALGOLIASEARCH_SEARCH_ONLY_KEY: ${ALGOLIASEARCH_SEARCH_ONLY_KEY}
     NEW_RELIC_KEY: ${NEW_RELIC_KEY}
     SCOUT_KEY: ${SCOUT_KEY}
+    RAILS_ENV: local_production
     REDIS_URL: redis://redis:6379/
     DATABASE_URL: postgres://postgres:postgres@postgres:5432
     WEBPACKER_DEV_SERVER_HOST: webpacker
